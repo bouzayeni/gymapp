@@ -32,5 +32,5 @@ app.get("/", (req, res) => {
   });
 
 
-
+PORT=process.env.PORT || 5000;
 app.listen(process.env.PORT, (err)=>err?console.log(err):console.log(`server is runing`))
