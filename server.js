@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 require('dotenv').config() ;
 //database config
-const connectDB = require('./config/connectDB');
+const connectDB = require('./server/config/connectDB');
 connectDB();
 
 app.use(express.json());
@@ -17,17 +17,17 @@ app.use(cors('http://localhost:3000'));
 
 
 // routes
-app.use('/api/person',require('./routes/personRoute'));
-app.use('/api/admin',require('./routes/adminRoute'));
-app.use('/api/post',require('./routes/postRoute'));
-app.use('/api/comment',require('./routes/commentRoute'));
+app.use('/api/person',require('./server/routes/personRoute'));
+app.use('/api/admin',require('./server/routes/adminRoute'));
+app.use('/api/post',require('./server/routes/postRoute'));
+app.use('/api/comment',require('./server/routes/commentRoute'));
 // images path
 app.use('/uploads',express.static(path.join(__dirname, '../','img-uploads')))
 
 // rendering the front end 
 
 app.use(express.static(path.join(__dirname, 'client','build')))
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
 
